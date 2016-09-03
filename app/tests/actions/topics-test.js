@@ -5,8 +5,7 @@ import md5 from 'spark-md5';
 import { polyfill } from 'es6-promise';
 import axios from 'axios';
 import expect from 'expect';
-import * as actions from 'actions/topics';
-import * as types from 'types';
+import * as actions from 'reducers/topic';
 
 polyfill();
 
@@ -44,12 +43,12 @@ describe('Topic Actions', () => {
     it('dispatches request and success actions when status is 200', done => {
       const expectedActions = [
         {
-          type: types.CREATE_TOPIC_REQUEST,
+          type: actions.CREATE_TOPIC_REQUEST,
           id,
           count: 1,
           text: data.text
         }, {
-          type: types.CREATE_TOPIC_SUCCESS
+          type: actions.CREATE_TOPIC_SUCCESS
         }
       ];
 
@@ -66,12 +65,12 @@ describe('Topic Actions', () => {
     it('dispatches request and failed actions when status is NOT 200', done => {
       const expectedActions = [
         {
-          type: types.CREATE_TOPIC_REQUEST,
+          type: actions.CREATE_TOPIC_REQUEST,
           id,
           count: 1,
           text: data.text
         }, {
-          type: types.CREATE_TOPIC_FAILURE,
+          type: actions.CREATE_TOPIC_FAILURE,
           id,
           error: 'Oops! Something went wrong and we couldn\'t create your topic'
         }
@@ -91,7 +90,7 @@ describe('Topic Actions', () => {
 
       const expectedActions = [
         {
-          type: types.CREATE_TOPIC_DUPLICATE
+          type: actions.CREATE_TOPIC_DUPLICATE
         }
       ];
 
@@ -104,7 +103,7 @@ describe('Topic Actions', () => {
     it('incrementCount dispatches an increment count action on success', done => {
       const expectedActions = [
       {
-        type: types.INCREMENT_COUNT,
+        type: actions.INCREMENT_COUNT,
         id
       }];
       sandbox.stub(axios, 'put').returns(Promise.resolve({ status: 200 }));
@@ -119,7 +118,7 @@ describe('Topic Actions', () => {
     it('incrementCount should not dispatch a failure action on failure', done => {
       const expectedActions = [
       {
-        type: types.CREATE_TOPIC_FAILURE,
+        type: actions.CREATE_TOPIC_FAILURE,
         id: data.id,
         error: 'Oops! Something went wrong and we couldn\'t add your vote'
       }];
@@ -135,7 +134,7 @@ describe('Topic Actions', () => {
     it('decrementCount dispatches an decrement count action on success', done => {
       const expectedActions = [
       {
-        type: types.DECREMENT_COUNT,
+        type: actions.DECREMENT_COUNT,
         id
       }];
       sandbox.stub(axios, 'put').returns(Promise.resolve({ status: 200 }));
@@ -150,7 +149,7 @@ describe('Topic Actions', () => {
     it('decrementCount should not dispatch a decrement count action on failure', done => {
       const expectedActions = [
       {
-        type: types.CREATE_TOPIC_FAILURE,
+        type: actions.CREATE_TOPIC_FAILURE,
         error: 'Oops! Something went wrong and we couldn\'t add your vote',
         id: data.id
       }];
@@ -166,7 +165,7 @@ describe('Topic Actions', () => {
     it('destroyTopic dispatches a decrement count action on success', done => {
       const expectedActions = [
       {
-        type: types.DESTROY_TOPIC,
+        type: actions.DESTROY_TOPIC,
         id
       }];
       sandbox.stub(axios, 'delete').returns(Promise.resolve({ status: 200 }));
@@ -181,7 +180,7 @@ describe('Topic Actions', () => {
     it('destroyTopic should not dispatch an decrement count action on failure', done => {
       const expectedActions = [
       {
-        type: types.CREATE_TOPIC_FAILURE,
+        type: actions.CREATE_TOPIC_FAILURE,
         id: data.id,
         error: 'Oops! Something went wrong and we couldn\'t add your vote'
       }];
@@ -215,7 +214,7 @@ describe('Topic Actions', () => {
 
     it('should create an action object to increment the count', () => {
       const expectedAction = {
-        type: types.INCREMENT_COUNT,
+        type: actions.INCREMENT_COUNT,
         id
       };
       expect(actions.increment(id)).toEqual(expectedAction);
@@ -223,7 +222,7 @@ describe('Topic Actions', () => {
 
     it('should create an action object to decrement count', () => {
       const expectedAction = {
-        type: types.DECREMENT_COUNT,
+        type: actions.DECREMENT_COUNT,
         id
       };
       expect(actions.decrement(id)).toEqual(expectedAction);
@@ -231,7 +230,7 @@ describe('Topic Actions', () => {
 
     it('should create an action object to destroy a topic', () => {
       const expectedAction = {
-        type: types.DESTROY_TOPIC,
+        type: actions.DESTROY_TOPIC,
         id
       };
       expect(actions.destroy(id)).toEqual(expectedAction);
@@ -239,7 +238,7 @@ describe('Topic Actions', () => {
 
     it('should create an action object with a new topic', () => {
       const expectedAction = {
-        type: types.TYPING,
+        type: actions.TYPING,
         newTopic: data.text
       };
       expect(actions.typing(data.text)).toEqual(expectedAction);
@@ -247,7 +246,7 @@ describe('Topic Actions', () => {
 
     it('should create an action object with a new topic request', () => {
       const expectedAction = {
-        type: types.CREATE_TOPIC_REQUEST,
+        type: actions.CREATE_TOPIC_REQUEST,
         id: data.id,
         count: data.count,
         text: data.text
@@ -257,7 +256,7 @@ describe('Topic Actions', () => {
 
     it('should create an action object on a new topic success', () => {
       const expectedAction = {
-        type: types.CREATE_TOPIC_SUCCESS
+        type: actions.CREATE_TOPIC_SUCCESS
       };
       expect(actions.createTopicSuccess()).toEqual(expectedAction);
     });
@@ -268,7 +267,7 @@ describe('Topic Actions', () => {
         id: data.id
       });
       const expectedAction = {
-        type: types.CREATE_TOPIC_FAILURE,
+        type: actions.CREATE_TOPIC_FAILURE,
         id: dataFail.id,
         error: dataFail.error
       };
@@ -277,7 +276,7 @@ describe('Topic Actions', () => {
 
     it('should create an action on a topic duplicate', () => {
       const expectedAction = {
-        type: types.CREATE_TOPIC_DUPLICATE
+        type: actions.CREATE_TOPIC_DUPLICATE
       };
       expect(actions.createTopicDuplicate()).toEqual(expectedAction);
     });
@@ -285,7 +284,7 @@ describe('Topic Actions', () => {
     it('should create an action when fetching topics', () => {
       sandbox.stub(axios, 'get').returns('hello');
       const expectedAction = {
-        type: types.GET_TOPICS,
+        type: actions.GET_TOPICS,
         promise: 'hello'
       };
       expect(actions.fetchTopics()).toEqual(expectedAction);

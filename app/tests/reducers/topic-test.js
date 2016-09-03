@@ -1,7 +1,15 @@
 import expect from 'expect';
 import md5 from 'spark-md5';
-import reducer from 'reducers/topic';
-import * as types from 'types';
+import reducer, {
+  'TYPING',
+  'CREATE_TOPIC_REQUEST',
+  'CREATE_TOPIC_FAILURE',
+  'GET_TOPICS_REQUEST',
+  'GET_TOPICS_SUCCESS',
+  'DESTROY_TOPIC',
+  'INCREMENT_COUNT',
+  'DECREMENT_COUNT',
+} from 'reducers/topic';
 
 describe('Topics reducer', () => {
   const s = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -49,7 +57,7 @@ describe('Topics reducer', () => {
   it('Should add a new topic to an empty initial state', () => {
     expect(
       reducer(undefined, {
-        type: types.CREATE_TOPIC_REQUEST,
+        type: CREATE_TOPIC_REQUEST,
         id: data.id,
         count: 1,
         text: topic
@@ -70,7 +78,7 @@ describe('Topics reducer', () => {
   it('Should handle TYPING', () => {
     expect(
       reducer(undefined, {
-        type: types.TYPING,
+        type: TYPING,
         newTopic: topic
       })
     ).toEqual({
@@ -83,7 +91,7 @@ describe('Topics reducer', () => {
   it('Should handle GET_TOPICS_REQUEST', () => {
     expect(
       reducer(undefined, {
-        type: types.GET_TOPICS_REQUEST
+        type: GET_TOPICS_REQUEST
       })
     ).toEqual({
         isFetching: true,
@@ -95,7 +103,7 @@ describe('Topics reducer', () => {
   it('Should handle GET_TOPICS_SUCCESS', () => {
     expect(
       reducer(undefined, {
-        type: types.GET_TOPICS_SUCCESS,
+        type: GET_TOPICS_SUCCESS,
         res: {
           data: topic
         }
@@ -115,7 +123,7 @@ describe('Topics reducer', () => {
         topics
       },
       {
-        type: types.CREATE_TOPIC_REQUEST,
+        type: CREATE_TOPIC_REQUEST,
         id: data.id,
         count: data.count,
         text: data.text
@@ -138,7 +146,7 @@ describe('Topics reducer', () => {
         newTopic: topic
       },
       {
-        type: types.CREATE_TOPIC_FAILURE,
+        type: CREATE_TOPIC_FAILURE,
         id: data.id
       })
     ).toEqual({
@@ -158,7 +166,7 @@ describe('Topics reducer', () => {
         newTopic: topic
       },
       {
-        type: types.DESTROY_TOPIC,
+        type: DESTROY_TOPIC,
         id: topics[topics.length - 1].id,
       })
     ).toEqual({
@@ -182,7 +190,7 @@ describe('Topics reducer', () => {
         newTopic: topic
       },
       {
-        type: types.INCREMENT_COUNT,
+        type: INCREMENT_COUNT,
         id: topics[topics.length - 1].id,
       })
     ).toEqual({
@@ -206,7 +214,7 @@ describe('Topics reducer', () => {
         newTopic: topic
       },
       {
-        type: types.DECREMENT_COUNT,
+        type: DECREMENT_COUNT,
         id: topics[topics.length - 1].id,
       })
     ).toEqual({

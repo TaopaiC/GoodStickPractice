@@ -1,6 +1,15 @@
 import expect from 'expect';
-import reducer from 'reducers/user';
-import * as types from 'types';
+import reducer, {
+  MANUAL_LOGIN_USER,
+  LOGIN_SUCCESS_USER,
+  LOGIN_ERROR_USER,
+  SIGNUP_USER,
+  SIGNUP_SUCCESS_USER,
+  SIGNUP_ERROR_USER,
+  LOGOUT_USER,
+  LOGOUT_SUCCESS_USER,
+  LOGOUT_ERROR_USER,
+} from 'reducers/user';
 
 describe('Users reducer', () => {
   const initialState = {
@@ -18,7 +27,7 @@ describe('Users reducer', () => {
 
   it('should handle MANUAL_LOGIN_USER', () => {
     expect(
-      reducer(undefined, {type: types.MANUAL_LOGIN_USER})
+      reducer(undefined, {type: MANUAL_LOGIN_USER})
     ).toEqual(Object.assign({}, initialState, {
       isWaiting: true,
       message: ''
@@ -27,7 +36,7 @@ describe('Users reducer', () => {
 
   it('should handle LOGIN_SUCCESS_USER', () => {
     expect(
-      reducer(undefined, {type: types.LOGIN_SUCCESS_USER})
+      reducer(undefined, {type: LOGIN_SUCCESS_USER})
     ).toEqual(Object.assign({}, initialState, {
       isWaiting: false,
       authenticated: true,
@@ -38,7 +47,7 @@ describe('Users reducer', () => {
   it('should handle LOGIN_ERROR_USER', () => {
     const message = 'Success';
     expect(
-      reducer(undefined, {type: types.LOGIN_ERROR_USER, message})
+      reducer(undefined, {type: LOGIN_ERROR_USER, message})
     ).toEqual(Object.assign({}, initialState, {
       isWaiting: false,
       authenticated: false,
@@ -48,7 +57,7 @@ describe('Users reducer', () => {
 
   it('should handle SIGNUP_USER', () => {
     expect(
-      reducer(undefined, {type: types.SIGNUP_USER})
+      reducer(undefined, {type: SIGNUP_USER})
     ).toEqual(Object.assign({}, initialState, {
       isWaiting: true,
       message: ''
@@ -57,7 +66,7 @@ describe('Users reducer', () => {
 
   it('should handle SIGNUP_SUCCESS_USER', () => {
     expect(
-      reducer(undefined, {type: types.SIGNUP_SUCCESS_USER})
+      reducer(undefined, {type: SIGNUP_SUCCESS_USER})
     ).toEqual(Object.assign({}, initialState, {
       isWaiting: false,
       authenticated: true
@@ -67,7 +76,7 @@ describe('Users reducer', () => {
   it('should handle SIGNUP_ERROR_USER', () => {
     const message = 'Oops! Something went wrong!';
     expect(
-      reducer(undefined, {type: types.SIGNUP_ERROR_USER, message})
+      reducer(undefined, {type: SIGNUP_ERROR_USER, message})
     ).toEqual(Object.assign({}, initialState, {
       isWaiting: false,
       authenticated: false,
@@ -77,7 +86,7 @@ describe('Users reducer', () => {
 
   it('should handle LOGOUT_USER', () => {
     expect(
-      reducer(undefined, {type: types.LOGOUT_USER})
+      reducer(undefined, {type: LOGOUT_USER})
     ).toEqual(Object.assign({}, initialState, {
       isWaiting: true,
       message: ''
@@ -86,7 +95,7 @@ describe('Users reducer', () => {
 
   it('should handle LOGOUT_SUCCESS_USER', () => {
     expect(
-      reducer(undefined, {type: types.LOGOUT_SUCCESS_USER})
+      reducer(undefined, {type: LOGOUT_SUCCESS_USER})
     ).toEqual(Object.assign({}, initialState, {
       isWaiting: false,
       authenticated: false
@@ -95,7 +104,7 @@ describe('Users reducer', () => {
 
   it('should handle LOGOUT_ERROR_USER', () => {
     expect(
-      reducer(undefined, {type: types.LOGOUT_ERROR_USER})
+      reducer(undefined, {type: LOGOUT_ERROR_USER})
     ).toEqual(Object.assign({}, initialState, {
       isWaiting: false,
       authenticated: true,
