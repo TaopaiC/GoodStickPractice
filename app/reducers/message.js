@@ -1,4 +1,9 @@
-import * as types from 'types';
+import {
+  LOGIN_SUCCESS_USER,
+  SIGNUP_SUCCESS_USER,
+} from './user';
+
+export const DISMISS_MESSAGE = 'goodstick/message/DISMISS_MESSAGE';
 
 /*
  * Message store for global messages, i.e. Network messages / Redirect messages
@@ -6,17 +11,22 @@ import * as types from 'types';
  * messages/notifications should appear within the component to give the user
  * more context. - My 2 cents.
  */
-export default function message(state = {
+export default function reducer(state = {
   message: '',
   type: 'SUCCESS'
 }, action = {}) {
   switch (action.type) {
-    case types.LOGIN_SUCCESS_USER:
-    case types.SIGNUP_SUCCESS_USER:
+    case LOGIN_SUCCESS_USER:
+    case SIGNUP_SUCCESS_USER:
       return {...state, message: action.message, type: 'SUCCESS'};
-    case types.DISMISS_MESSAGE:
+    case DISMISS_MESSAGE:
       return {...state, message: '', type: 'SUCCESS'};
     default:
       return state;
   }
 }
+
+export function dismissMessage() {
+  return { type: DISMISS_MESSAGE };
+}
+
