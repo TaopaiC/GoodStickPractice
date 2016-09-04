@@ -1,14 +1,14 @@
 import expect from 'expect';
 import md5 from 'spark-md5';
 import reducer, {
-  'TYPING',
-  'CREATE_TOPIC_REQUEST',
-  'CREATE_TOPIC_FAILURE',
-  'GET_TOPICS_REQUEST',
-  'GET_TOPICS_SUCCESS',
-  'DESTROY_TOPIC',
-  'INCREMENT_COUNT',
-  'DECREMENT_COUNT',
+  TYPING,
+  CREATE_TOPIC_REQUEST,
+  CREATE_TOPIC_FAILURE,
+  GET_TOPICS_REQUEST,
+  GET_TOPICS_SUCCESS,
+  DESTROY_TOPIC,
+  INCREMENT_COUNT,
+  DECREMENT_COUNT,
 } from 'reducers/topic';
 
 describe('Topics reducer', () => {

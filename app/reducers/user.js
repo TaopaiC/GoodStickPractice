@@ -53,7 +53,6 @@ const isWaiting = (
   state = false,
   action
 ) => {
-  console.log('isWaiting', action.type);
   switch (action.type) {
     case MANUAL_LOGIN_USER:
     case SIGNUP_USER:
