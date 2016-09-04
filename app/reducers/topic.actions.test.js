@@ -1,11 +1,12 @@
+/* eslint-env node, jest */
 /* eslint no-unused-vars: 0 */ // since fetch is needed but not used
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import md5 from 'spark-md5';
 import { polyfill } from 'es6-promise';
 import axios from 'axios';
-import expect from 'expect';
 import * as actions from 'reducers/topic';
+import sinon from 'sinon';
 
 polyfill();
 
