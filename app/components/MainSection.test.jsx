@@ -1,5 +1,5 @@
+/* eslint-env node, jest */
 import React from 'react';
-import expect from 'expect';
 import { mount } from 'enzyme';
 import MainSection from 'components/MainSection';
 import TopicItem from 'components/TopicItem';
