@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { logOut } from 'reducers/user';
 
 import classNames from 'classnames/bind';
-import styles from 'css/components/navigation';
+import styles from 'css/components/navigation.css';
 
 const cx = classNames.bind(styles);
 

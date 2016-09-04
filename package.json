@@ -16,13 +16,14 @@
     "build:prod": "cross-env NODE_ENV=production webpack --colors --config ./webpack/webpack.config.prod.js",
     "build:node": "cross-env NODE_ENV=production npm run babel -- ./server -d ./compiled",
     "build": "npm run clean && npm run build:prod && npm run build:node",
-    "test": "cross-env NODE_ENV=test karma start",
-    "test:watch": "cross-env NODE_ENV=test npm test -- --watch --no-single-run",
+    "test": "jest --env=jsdom --json",
+    "test:watch": "jest --env=jsdom --watch",
     "postinstall": "npm run build"
   },
   "author": "Choon Ken Ding",
   "license": "MIT",
   "devDependencies": {
+    "babel-jest": "^15.0.0",
     "enzyme": "^2.4.1",
     "eslint": "^3.3.1",
     "eslint-config-airbnb": "^10.0.0",
@@ -30,6 +31,7 @@
     "eslint-plugin-jsx-a11y": "^2.0.1",
     "eslint-plugin-react": "^6.1.2",
     "expect": "^1.15.2",
+    "jest": "^15.1.1",
     "karma": "^1.1.1",
     "karma-jsdom-launcher": "^4.0.0",
     "karma-mocha": "^1.0.1",
@@ -126,5 +128,28 @@
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.12.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "jsx",
+      "js",
+      "json"
+    ],
+    "moduleDirectories": [
+      "<rootDir>/app",
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "^[./a-zA-Z0-9$_-]+\\.(jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$": "<rootDir>/config/jest/FileStub.js",
+      "^[./a-zA-Z0-9$_-]+\\.css$": "<rootDir>/config/jest/CSSStub.js"
+    },
+    "scriptPreprocessor": "<rootDir>/config/jest/transform.js",
+    "setupFiles": [
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/(build|docs|node_modules)/"
+    ],
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$"
   }
 }
