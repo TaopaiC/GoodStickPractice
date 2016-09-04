@@ -230,9 +230,9 @@ export function fetchTopics() {
 export function incrementCount(id) {
   return dispatch => {
     return makeTopicRequest('put', id, {
-        isFull: false,
-        isIncrement: true
-      })
+      isFull: false,
+      isIncrement: true
+    })
       .then(() => dispatch(increment(id)))
       .catch(() => dispatch(createTopicFailure({id, error: 'Oops! Something went wrong and we couldn\'t add your vote'})));
   };
@@ -241,9 +241,9 @@ export function incrementCount(id) {
 export function decrementCount(id) {
   return dispatch => {
     return makeTopicRequest('put', id, {
-        isFull: false,
-        isIncrement: false
-      })
+      isFull: false,
+      isIncrement: false
+    })
       .then(() => dispatch(decrement(id)))
       .catch(() => dispatch(createTopicFailure({id, error: 'Oops! Something went wrong and we couldn\'t add your vote'})));
   };
