@@ -1,4 +1,4 @@
-import expect from 'expect';
+/* eslint-env node, jest */
 import md5 from 'spark-md5';
 import reducer, {
   TYPING,
