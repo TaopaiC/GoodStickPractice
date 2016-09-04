@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import Models from '../models';
+
 const Topic = Models.Topic;
 const sequelize = Models.sequelize;
 

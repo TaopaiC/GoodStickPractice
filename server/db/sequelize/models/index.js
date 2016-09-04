@@ -3,6 +3,7 @@ import path from 'path';
 import Sequelize from 'sequelize';
 import sequelizeConfig from '../sequelize_config';
 import { ENV } from '../../../config/appConfig';
+
 const config = sequelizeConfig[ENV];
 const basename = path.basename(module.filename);
 const db = {};

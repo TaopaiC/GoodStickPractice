@@ -63,15 +63,15 @@ describe('Topics reducer', () => {
         text: topic
       })
     ).toEqual({
-        topics: [
-          {
-            id: data.id,
-            count: 1,
-            text: topic
-          }
-        ],
-        newTopic: '',
-        isFetching: false
+      topics: [
+        {
+          id: data.id,
+          count: 1,
+          text: topic
+        }
+      ],
+      newTopic: '',
+      isFetching: false
     });
   });
 
@@ -82,9 +82,9 @@ describe('Topics reducer', () => {
         newTopic: topic
       })
     ).toEqual({
-        topics: [],
-        newTopic: topic,
-        isFetching: false
+      topics: [],
+      newTopic: topic,
+      isFetching: false
     });
   });
 
@@ -94,9 +94,9 @@ describe('Topics reducer', () => {
         type: GET_TOPICS_REQUEST
       })
     ).toEqual({
-        isFetching: true,
-        topics: [],
-        newTopic: ''
+      isFetching: true,
+      topics: [],
+      newTopic: ''
     });
   });
 
@@ -109,9 +109,9 @@ describe('Topics reducer', () => {
         }
       })
     ).toEqual({
-        isFetching: false,
-        topics: topic,
-        newTopic: ''
+      isFetching: false,
+      topics: topic,
+      newTopic: ''
     });
   });
 
@@ -122,17 +122,17 @@ describe('Topics reducer', () => {
       reducer({
         topics
       },
-      {
-        type: CREATE_TOPIC_REQUEST,
-        id: data.id,
-        count: data.count,
-        text: data.text
+        {
+          type: CREATE_TOPIC_REQUEST,
+          id: data.id,
+          count: data.count,
+          text: data.text
 
-      })
+        })
     ).toEqual({
-        newTopic: '',
-        topics: newTopics,
-        isFetching: false
+      newTopic: '',
+      topics: newTopics,
+      isFetching: false
     });
   });
 
@@ -145,14 +145,14 @@ describe('Topics reducer', () => {
         topics,
         newTopic: topic
       },
-      {
-        type: CREATE_TOPIC_FAILURE,
-        id: data.id
-      })
+        {
+          type: CREATE_TOPIC_FAILURE,
+          id: data.id
+        })
     ).toEqual({
-        topics: newTopics.pop() && newTopics,
-        newTopic: topic,
-        isFetching: false
+      topics: newTopics.pop() && newTopics,
+      newTopic: topic,
+      isFetching: false
     });
   });
 
@@ -165,14 +165,14 @@ describe('Topics reducer', () => {
         topics,
         newTopic: topic
       },
-      {
-        type: DESTROY_TOPIC,
-        id: topics[topics.length - 1].id,
-      })
+        {
+          type: DESTROY_TOPIC,
+          id: topics[topics.length - 1].id,
+        })
     ).toEqual({
-        topics: newTopics.pop() && newTopics,
-        newTopic: topic,
-        isFetching: false
+      topics: newTopics.pop() && newTopics,
+      newTopic: topic,
+      isFetching: false
     });
   });
 
@@ -189,14 +189,14 @@ describe('Topics reducer', () => {
         topics,
         newTopic: topic
       },
-      {
-        type: INCREMENT_COUNT,
-        id: topics[topics.length - 1].id,
-      })
+        {
+          type: INCREMENT_COUNT,
+          id: topics[topics.length - 1].id,
+        })
     ).toEqual({
-        topics: newTopics,
-        newTopic: topic,
-        isFetching: false
+      topics: newTopics,
+      newTopic: topic,
+      isFetching: false
     });
   });
 
@@ -213,14 +213,14 @@ describe('Topics reducer', () => {
         topics,
         newTopic: topic
       },
-      {
-        type: DECREMENT_COUNT,
-        id: topics[topics.length - 1].id,
-      })
+        {
+          type: DECREMENT_COUNT,
+          id: topics[topics.length - 1].id,
+        })
     ).toEqual({
-        topics: newTopics,
-        newTopic: topic,
-        isFetching: false
+      topics: newTopics,
+      newTopic: topic,
+      isFetching: false
     });
   });
 });

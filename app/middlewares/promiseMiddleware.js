@@ -22,5 +22,5 @@ export default function promiseMiddleware() {
         next({ ...rest, error, type: FAILURE });
         return false;
       });
-   };
+  };
 }

@@ -102,10 +102,10 @@ describe('Topic Actions', () => {
 
     it('incrementCount dispatches an increment count action on success', done => {
       const expectedActions = [
-      {
-        type: actions.INCREMENT_COUNT,
-        id
-      }];
+        {
+          type: actions.INCREMENT_COUNT,
+          id
+        }];
       sandbox.stub(axios, 'put').returns(Promise.resolve({ status: 200 }));
       const store = mockStore();
       store.dispatch(actions.incrementCount(data.id))
@@ -117,11 +117,11 @@ describe('Topic Actions', () => {
 
     it('incrementCount should not dispatch a failure action on failure', done => {
       const expectedActions = [
-      {
-        type: actions.CREATE_TOPIC_FAILURE,
-        id: data.id,
-        error: 'Oops! Something went wrong and we couldn\'t add your vote'
-      }];
+        {
+          type: actions.CREATE_TOPIC_FAILURE,
+          id: data.id,
+          error: 'Oops! Something went wrong and we couldn\'t add your vote'
+        }];
       sandbox.stub(axios, 'put').returns(Promise.reject({ status: 400 }));
       const store = mockStore();
       store.dispatch(actions.incrementCount(data.id, index))
@@ -133,10 +133,10 @@ describe('Topic Actions', () => {
 
     it('decrementCount dispatches an decrement count action on success', done => {
       const expectedActions = [
-      {
-        type: actions.DECREMENT_COUNT,
-        id
-      }];
+        {
+          type: actions.DECREMENT_COUNT,
+          id
+        }];
       sandbox.stub(axios, 'put').returns(Promise.resolve({ status: 200 }));
       const store = mockStore();
       store.dispatch(actions.decrementCount(data.id))
@@ -148,11 +148,11 @@ describe('Topic Actions', () => {
 
     it('decrementCount should not dispatch a decrement count action on failure', done => {
       const expectedActions = [
-      {
-        type: actions.CREATE_TOPIC_FAILURE,
-        error: 'Oops! Something went wrong and we couldn\'t add your vote',
-        id: data.id
-      }];
+        {
+          type: actions.CREATE_TOPIC_FAILURE,
+          error: 'Oops! Something went wrong and we couldn\'t add your vote',
+          id: data.id
+        }];
       sandbox.stub(axios, 'put').returns(Promise.reject({ status: 400 }));
       const store = mockStore(initialState);
       store.dispatch(actions.decrementCount(data.id))
@@ -164,10 +164,10 @@ describe('Topic Actions', () => {
 
     it('destroyTopic dispatches a decrement count action on success', done => {
       const expectedActions = [
-      {
-        type: actions.DESTROY_TOPIC,
-        id
-      }];
+        {
+          type: actions.DESTROY_TOPIC,
+          id
+        }];
       sandbox.stub(axios, 'delete').returns(Promise.resolve({ status: 200 }));
       const store = mockStore();
       store.dispatch(actions.destroyTopic(data.id))
@@ -179,11 +179,11 @@ describe('Topic Actions', () => {
 
     it('destroyTopic should not dispatch an decrement count action on failure', done => {
       const expectedActions = [
-      {
-        type: actions.CREATE_TOPIC_FAILURE,
-        id: data.id,
-        error: 'Oops! Something went wrong and we couldn\'t add your vote'
-      }];
+        {
+          type: actions.CREATE_TOPIC_FAILURE,
+          id: data.id,
+          error: 'Oops! Something went wrong and we couldn\'t add your vote'
+        }];
       sandbox.stub(axios, 'delete').returns(Promise.reject({ status: 400 }));
       const store = mockStore();
       store.dispatch(actions.destroyTopic(data.id))

@@ -11,60 +11,60 @@ const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
 describe('Users Async Actions', () => {
-    let sandbox;
+  let sandbox;
 
-    const initialState = {
-      isLogin: true,
-      message: '',
-      isWaiting: false,
-      authenticated: false
-    };
+  const initialState = {
+    isLogin: true,
+    message: '',
+    isWaiting: false,
+    authenticated: false
+  };
 
-    const response = {
+  const response = {
+    data: {
+      message: 'Success'
+    },
+    status: 200
+  };
+
+  const data = {
+    email: 'hello@world.com',
+    password: '2BeOrNot2Be'
+  };
+
+  const errMsg = {
+    response: {
       data: {
-        message: 'Success'
-      },
-      status: 200
-    };
-
-    const data = {
-      email: 'hello@world.com',
-      password: '2BeOrNot2Be'
-    };
-
-    const errMsg = {
-      response: {
-        data: {
-          message: 'Oops! Something went wrong!'
-        }
+        message: 'Oops! Something went wrong!'
       }
-    };
+    }
+  };
 
-    beforeEach(() => {
+  beforeEach(() => {
       sandbox = sinon.sandbox.create(); // eslint-disable-line
-    });
+  });
 
-    afterEach(() => {
-      sandbox.restore();
-    });
+  afterEach(() => {
+    sandbox.restore();
+  });
 
   describe('User Login', () => {
     it('dispatches MANUAL_LOGIN_USER and LOGIN_SUCCESS_USER when Manual Login returns status of 200 and routes user to /', (done) => {
       const expectedActions = [
-      {
-        type: actions.MANUAL_LOGIN_USER
-      },
-      {
-        type: actions.LOGIN_SUCCESS_USER,
-        message: response.data.message
-      },
-      {
-        payload: {
-          args: ['/'],
-          method: 'push'
+        {
+          type: actions.MANUAL_LOGIN_USER
         },
-        type: '@@router/CALL_HISTORY_METHOD'
-      }];
+        {
+          type: actions.LOGIN_SUCCESS_USER,
+          message: response.data.message
+        },
+        {
+          payload: {
+            args: ['/'],
+            method: 'push'
+          },
+          type: '@@router/CALL_HISTORY_METHOD'
+        }];
 
       sandbox.stub(axios, 'post').returns(Promise.resolve(response));
 
@@ -78,13 +78,13 @@ describe('Users Async Actions', () => {
 
     it('dispatches MANUAL_LOGIN_USER and LOGIN_ERROR_USER when Manual Login returns status that is NOT 200', (done) => {
       const expectedActions = [
-      {
-        type: actions.MANUAL_LOGIN_USER
-      },
-      {
-        type: actions.LOGIN_ERROR_USER,
-        message: errMsg.response.data.message
-      }];
+        {
+          type: actions.MANUAL_LOGIN_USER
+        },
+        {
+          type: actions.LOGIN_ERROR_USER,
+          message: errMsg.response.data.message
+        }];
 
       sandbox.stub(axios, 'post').returns(Promise.reject(errMsg));
 
@@ -100,20 +100,20 @@ describe('Users Async Actions', () => {
   describe('User Signup', () => {
     it('dispatches SIGNUP_USER and SIGNUP_SUCCESS_USER when Sign Up returns status of 200 and routes user to /', (done) => {
       const expectedActions = [
-      {
-        type: actions.SIGNUP_USER
-      },
-      {
-        type: actions.SIGNUP_SUCCESS_USER,
-        message: response.data.message
-      },
-      {
-        payload: {
-          args: ['/'],
-          method: 'push'
+        {
+          type: actions.SIGNUP_USER
         },
-        type: '@@router/CALL_HISTORY_METHOD'
-      }];
+        {
+          type: actions.SIGNUP_SUCCESS_USER,
+          message: response.data.message
+        },
+        {
+          payload: {
+            args: ['/'],
+            method: 'push'
+          },
+          type: '@@router/CALL_HISTORY_METHOD'
+        }];
 
       sandbox.stub(axios, 'post').returns(Promise.resolve(response));
 
@@ -127,13 +127,13 @@ describe('Users Async Actions', () => {
 
     it('dispatches SIGNUP_USER and SIGNUP_ERROR_USER when Sign Up returns status of NOT 200', (done) => {
       const expectedActions = [
-      {
-        type: actions.SIGNUP_USER
-      },
-      {
-        type: actions.SIGNUP_ERROR_USER,
-        message: errMsg.response.data.message
-      }
+        {
+          type: actions.SIGNUP_USER
+        },
+        {
+          type: actions.SIGNUP_ERROR_USER,
+          message: errMsg.response.data.message
+        }
       ];
 
       sandbox.stub(axios, 'post').returns(Promise.reject(errMsg));
@@ -149,12 +149,12 @@ describe('Users Async Actions', () => {
   describe('User Logout', () => {
     it('dispatches SIGNUP_USER and SIGNUP_SUCCESS_USER when Sign Up returns status of 200 and routes user to /', (done) => {
       const expectedActions = [
-      {
-        type: actions.LOGOUT_USER
-      },
-      {
-        type: actions.LOGOUT_SUCCESS_USER
-      }];
+        {
+          type: actions.LOGOUT_USER
+        },
+        {
+          type: actions.LOGOUT_SUCCESS_USER
+        }];
 
       sandbox.stub(axios, 'post').returns(Promise.resolve({status: 200}));
 
@@ -168,12 +168,12 @@ describe('Users Async Actions', () => {
 
     it('dispatches SIGNUP_USER and SIGNUP_ERROR_USER when Sign Up returns status of NOT 200', (done) => {
       const expectedActions = [
-      {
-        type: actions.SIGNUP_USER
-      },
-      {
-        type: actions.SIGNUP_ERROR_USER,
-      }];
+        {
+          type: actions.SIGNUP_USER
+        },
+        {
+          type: actions.SIGNUP_ERROR_USER,
+        }];
 
       sandbox.stub(axios, 'post').returns(Promise.reject());
 
