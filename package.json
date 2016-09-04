@@ -16,9 +16,9 @@
     "build:prod": "cross-env NODE_ENV=production webpack --colors --config ./webpack/webpack.config.prod.js",
     "build:node": "cross-env NODE_ENV=production npm run babel -- ./server -d ./compiled",
     "build": "npm run clean && npm run build:prod && npm run build:node",
-    "test": "jest --env=jsdom --json --coverage",
-    "test:ci": "jest --env=jsdom --json --coverage && cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "test:watch": "jest --env=jsdom --watch",
+    "test": "jest --coverage",
+    "test:ci": "jest --json --coverage && cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test:watch": "jest --watch --coverage",
     "postinstall": "npm run build"
   },
   "author": "Choon Ken Ding",
@@ -140,7 +140,7 @@
     "testPathIgnorePatterns": [
       "<rootDir>/(build|docs|node_modules)/"
     ],
-    "testEnvironment": "node",
+    "testEnvironment": "jsdom",
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$"
   }
 }
