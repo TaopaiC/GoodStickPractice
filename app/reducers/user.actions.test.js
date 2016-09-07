@@ -1,9 +1,10 @@
+/* eslint-env node, jest */
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { polyfill } from 'es6-promise';
 import axios from 'axios';
-import expect from 'expect';
 import * as actions from 'reducers/user';
+import sinon from 'sinon';
 
 polyfill();
 

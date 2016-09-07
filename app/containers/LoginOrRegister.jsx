@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import { manualLogin, signUp, toggleLoginMode } from 'reducers/user';
-import styles from 'css/components/login';
+import styles from 'css/components/login.css';
 import hourGlassSvg from 'images/hourglass.svg';
 
 const cx = classNames.bind(styles);

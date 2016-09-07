@@ -16,35 +16,30 @@
     "build:prod": "cross-env NODE_ENV=production webpack --colors --config ./webpack/webpack.config.prod.js",
     "build:node": "cross-env NODE_ENV=production npm run babel -- ./server -d ./compiled",
     "build": "npm run clean && npm run build:prod && npm run build:node",
-    "test": "cross-env NODE_ENV=test karma start",
-    "test:watch": "cross-env NODE_ENV=test npm test -- --watch --no-single-run",
+    "test": "jest --coverage",
+    "test:ci": "jest --json --coverage && cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test:watch": "jest --watch --coverage",
     "postinstall": "npm run build"
   },
   "author": "Choon Ken Ding",
   "license": "MIT",
   "devDependencies": {
+    "babel-jest": "^15.0.0",
+    "coveralls": "^2.11.12",
     "enzyme": "^2.4.1",
     "eslint": "^3.3.1",
     "eslint-config-airbnb": "^10.0.0",
     "eslint-plugin-import": "^1.6.0",
     "eslint-plugin-jsx-a11y": "^2.0.1",
     "eslint-plugin-react": "^6.1.2",
-    "expect": "^1.15.2",
-    "karma": "^1.1.1",
-    "karma-jsdom-launcher": "^4.0.0",
-    "karma-mocha": "^1.0.1",
-    "karma-mocha-reporter": "^2.0.0",
-    "karma-sinon": "^1.0.4",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^1.7.0",
-    "mocha": "^3.0.1",
+    "jest": "^15.1.1",
     "nock": "^8.0.0",
     "nodemon": "^1.10.2",
     "null-loader": "^0.1.1",
     "react-addons-test-utils": "^15.3.1",
     "react-transform-catch-errors": "^1.0.2",
     "redux-mock-store": "1.1.2",
-    "sinon": "^1.17.4",
+    "sinon": "^1.17.5",
     "stylelint": "^7.1.0",
     "stylelint-webpack-plugin": "^0.3.1"
   },
@@ -70,7 +65,6 @@
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.3.5",
     "body-parser": "^1.15.0",
-    "chai": "^3.5.0",
     "classnames": "^2.2.3",
     "compression": "^1.6.2",
     "connect-mongo": "^1.1.0",
@@ -126,5 +120,27 @@
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.12.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "jsx",
+      "js",
+      "json"
+    ],
+    "moduleDirectories": [
+      "<rootDir>/app",
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "^[./a-zA-Z0-9$_-]+\\.(jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm)$": "<rootDir>/config/jest/FileStub.js",
+      "^[./a-zA-Z0-9$_-]+\\.css$": "<rootDir>/config/jest/CSSStub.js"
+    },
+    "scriptPreprocessor": "<rootDir>/config/jest/transform.js",
+    "setupFiles": [],
+    "testPathIgnorePatterns": [
+      "<rootDir>/(build|docs|node_modules)/"
+    ],
+    "testEnvironment": "jsdom",
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$"
   }
 }

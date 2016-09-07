@@ -6,7 +6,7 @@ import MainSection from 'components/MainSection';
 import Scoreboard from 'components/Scoreboard';
 import { createTopic, typing, incrementCount,
   decrementCount, destroyTopic, fetchTopics } from 'reducers/topic';
-import styles from 'css/components/vote';
+import styles from 'css/components/vote.css';
 
 const cx = classNames.bind(styles);
 

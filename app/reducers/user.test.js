@@ -1,4 +1,4 @@
-import expect from 'expect';
+/* eslint-env node, jest */
 import reducer, {
   MANUAL_LOGIN_USER,
   LOGIN_SUCCESS_USER,
